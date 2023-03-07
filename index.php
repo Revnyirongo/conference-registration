@@ -1,23 +1,25 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Client Registration Form</title>
+	<title>UbuntuNet-Connect conference registration</title>
 </head>
 <body>
 	<h1>Client Registration Form</h1>
 	<form action="" method="POST">
 		<label for="name">Name:</label>
 		<input type="text" name="name" id="name" required><br>
-
+		<br>
 		<label for="email">Email:</label>
 		<input type="email" name="email" id="email" required><br>
-
+		<br>
 		<label for="phone">Phone:</label>
 		<input type="tel" name="phone" id="phone" required><br>
-
+		<br>
 		<label for="message">Message:</label>
 		<textarea name="message" id="message" rows="5" required></textarea><br>
-
+		<br>
+		<label for="attachment">Attachment:</label>
+		<input type="file" name="attachment" id="attachment"><br>
 		<input type="submit" name="submit" value="Register">
 	</form>
 	
