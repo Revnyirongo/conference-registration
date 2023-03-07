@@ -15,6 +15,9 @@
 		<label for="phone">Phone:</label>
 		<input type="tel" name="phone" id="phone" required><br>
 		<br>
+		<label for="country">Country:</label>
+		<textarea name="country" id="country" rows="1" required></textarea><br>
+		<br>
 		<label for="message">Message:</label>
 		<textarea name="message" id="message" rows="5" required></textarea><br>
 		<br>
