@@ -4,7 +4,7 @@
 	<title>UbuntuNet-Connect conference registration</title>
 </head>
 <body>
-	<h1>Client Registration Form</h1>
+	<h1>UbuntuNet-Connect conference registration</h1>
 	<form action="" method="POST">
 		<label for="name">Name:</label>
 		<input type="text" name="name" id="name" required><br>
