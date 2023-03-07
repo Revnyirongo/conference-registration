@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>UbuntuNet-Connect conference registration</title>
+	<title>UbuntuNet-Connect Conference registration</title>
 </head>
 <body>
 	<h1>UbuntuNet-Connect conference registration</h1>
