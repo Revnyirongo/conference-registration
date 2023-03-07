@@ -1,0 +1,30 @@
+Design Document for UbuntuNet-Connect Conference Registration Platform
+
+Introduction:
+This design document provides an overview of the design and architecture of the UbuntuNet-Connect conference registration platform. The platform is a web-based system that enables attendees to register for the conference. The platform will be developed using PHP programming language. The organizers will receive an email notification for every new registration, and the platform will be TLS/SSL secured.
+
+High Availability:
+High availability is crucial for the UbuntuNet-Connect conference registration platform. The following measures will be implemented to ensure high availability of the platform:
+
+Load Balancing: The platform will be deployed on multiple servers, and a load balancer will distribute incoming requests across these servers. This will ensure that the platform can handle a high volume of traffic, and if one server fails, the load balancer will redirect traffic to the remaining servers. As we expect at some point to have many people wanting to register at the same time.
+
+Database Replication: The platform will use a database to store registration data. The database will be replicated on multiple servers to ensure that if one server fails, the data can still be accessed from the remaining servers. A mysql database will be setup to handle registration data.
+
+Backup and Recovery: Regular backups of the registration data will be taken and stored in a secure location. In case of data loss or corruption, the data can be recovered from the backups.
+Failover: In case of a server failure, a backup server will take over to ensure continuity of service.
+
+Platform Implementation:
+The conference registration platform will be developed using PHP programming language. The platform will be TLS/SSL secured to ensure secure data transmission. For every new registration, the organizers will receive an email notification on devops[at]ubuntunet[dot]net with new details and a summary of all the registrations attached. The sever will be configured with SMTP environment variables to that email sending is made easy.
+
+Platform Deployment:
+The Docker containerized setup of the UbuntuNet-Connect conference registration platform will be deployed on the infrastructure availed using Jenkins. SMTP settings will be configured in order to enable email notifications.
+
+CI/CD for the Platform:
+To ensure that platform changes are pushed all through to the running instance, a jenkins Continuous Integration and Continuous Deployment (CI/CD) pipeline will be set up. The pipeline will automatically build, test, and deploy any changes to the platform whose source code will be hosted on github.
+
+Platform Monitoring:
+The UbuntuNet-Connect conference registration platform will be monitored to ensure its effective operation. The monitoring will cover all associated services. In case of downtime in any of the critical services, an alert will be sent to devops[at]ubuntunet[dot]net with relevant server error information information. Also Jenkins will be setup to notify revnyirongo[at]live[dot]com
+
+Conclusion:
+In conclusion, the UbuntuNet-Connect conference registration platform will be a high availability web-based system developed using PHP programming language. The platform will be TLS/SSL secured, and it will use load balancing, database replication, backup and recovery, and failover mechanisms to ensure high availability. The platform will be deployed on a Docker containerized infrastructure, and a Jenkins CI/CD pipeline will be set up to ensure continuous integration and deployment. The platform will be monitored to ensure effective operation, and relevant alerts will be sent in case of any downtime.
+
