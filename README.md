@@ -1,4 +1,4 @@
-# Build php-rev
+# Build conference-registration
 
 docker build -t conference-registration .
 
