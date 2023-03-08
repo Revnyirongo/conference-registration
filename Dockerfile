@@ -14,6 +14,8 @@ RUN alias composer='php /usr/bin/composer'
 COPY . /var/www/html/
 WORKDIR /var/www/html/
 
+EXPOSE 8082
+
 RUN composer update --no-scripts 
 
 ENV COMPOSER_ALLOW_SUPERUSER=1
@@ -21,3 +23,4 @@ ENV COMPOSER_ALLOW_SUPERUSER=1
 RUN composer dump-autoload
 
 RUN composer install
+
