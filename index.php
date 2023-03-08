@@ -4,56 +4,45 @@
 	<title>UbuntuNet-Connect Conference registration</title>
 	<style>
 		body {
-			font-family: Arial, sans-serif;
-			background-color: #F4F4F4;
+			text-align: center;
 		}
 		h1 {
-			text-align: center;
-			color: #0066CC;
+			margin-top: 50px;
+			margin-bottom: 20px;
 		}
 		form {
 			margin: 0 auto;
-			width: 80%;
-			max-width: 500px;
-			padding: 20px;
-			background-color: #FFFFFF;
-			border: 1px solid #CCCCCC;
-			border-radius: 5px;
+			width: 50%;
+			text-align: left;
 		}
 		label {
-			display: block;
-			font-weight: bold;
-			margin-bottom: 5px;
-			color: #333333;
-		}
-		input[type="text"],
-		input[type="email"],
-		input[type="tel"],
-		textarea {
-			padding: 10px;
-			border: 1px solid #CCCCCC;
-			border-radius: 5px;
-			width: 100%;
-			margin-bottom: 20px;
-			box-sizing: border-box;
-			font-size: 16px;
-			color: #333333;
-			resize: vertical;
-		}
-		input[type="file"] {
+			display: inline-block;
+			width: 100px;
 			margin-bottom: 10px;
+			text-align: right;
 		}
-		input[type="submit"] {
-			background-color: #0066CC;
-			color: #FFFFFF;
+		input[type=text], input[type=email], input[type=tel], textarea {
+			width: 250px;
+			padding: 5px;
+			margin-bottom: 10px;
+			border: 1px solid #ccc;
+			border-radius: 4px;
+			box-sizing: border-box;
+		}
+		input[type=file] {
+			margin-top: 10px;
+		}
+		input[type=submit] {
+			background-color: #4CAF50;
+			color: white;
 			padding: 10px 20px;
 			border: none;
-			border-radius: 5px;
-			font-size: 16px;
+			border-radius: 4px;
 			cursor: pointer;
+			margin-top: 10px;
 		}
-		input[type="submit"]:hover {
-			background-color: #003399;
+		input[type=submit]:hover {
+			background-color: #45a049;
 		}
 	</style>
 </head>
