@@ -1,9 +1,5 @@
-# Build conference-registration
+# Build and run application
 
-docker build -t conference-registration .
-
-# run application
-
-docker-compose up
+bash setup.sh
 
 Application runs on http://revnyirongo.ubuntunet.org:8081/
