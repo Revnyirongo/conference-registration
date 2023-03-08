@@ -77,8 +77,8 @@ use PHPMailer\PHPMailer\Exception;
 require 'vendor/autoload.php';
 
 // Handle form submission
-if(isset($_POST['submit'])) {
-   
+if (isset($_POST['submit'])) {
+
     // Send email using PHPMailer
     $mail = new PHPMailer(true);
 
@@ -101,8 +101,8 @@ if(isset($_POST['submit'])) {
         $email = $_POST['email'];
         $phone = $_POST['phone'];
         $message = $_POST['message'];
-	$country = $_POST['country'];
-	$country = $_POST['attachment'];
+        $country = $_POST['country'];
+        $attachment = $_FILES['attachment'];
 
         // Inserting the form data into the MySQL database
         $sql = "INSERT INTO clients (name, email, phone, message)
@@ -117,7 +117,7 @@ if(isset($_POST['submit'])) {
         // Get a summary of all registrations
         $result = mysqli_query($conn, "SELECT name, email, phone, message FROM clients");
         $registrations = "";
-        while($row = mysqli_fetch_array($result)) {
+        while ($row = mysqli_fetch_array($result)) {
             $registrations .= "Name: " . $row['name'] . "\nEmail: " . $row['email'] . "\nPhone: " . $row['phone'] . "\nMessage: " . $row['message'] . "\n\n";
         }
 
@@ -133,7 +133,12 @@ if(isset($_POST['submit'])) {
 
         // Recipients
         $mail->setFrom('revnyirongo@live.com', 'Client Registration');
-        $mail->addAddress('revnyirongo@live.com', 'Organizers');
+        $mail->addAddress('devops@ubuntunet.net', 'Organizers');
+
+        // Attach file if uploaded
+        if ($attachment['name']) {
+            $mail->addAttachment($attachment['tmp_name'], $attachment['name']);
+        }
 
         // Content
         $mail->isHTML(false);
