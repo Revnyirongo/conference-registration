@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>UbuntuNet-Connect Conference registration</title>
+	<title>UbuntuNet Conference registration</title>
 	<style>
 		body {
 			text-align: center;
