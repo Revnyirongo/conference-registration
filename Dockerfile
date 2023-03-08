@@ -14,6 +14,8 @@ WORKDIR /var/www/html/
 
 RUN composer update --no-scripts 
 
+ENV COMPOSER_ALLOW_SUPERUSER=1
+
 RUN composer dump-autoload
 
 RUN composer install
