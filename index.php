@@ -78,12 +78,7 @@ require 'vendor/autoload.php';
 
 // Handle form submission
 if(isset($_POST['submit'])) {
-    // Retrieve form data
-    $name = $_POST['name'];
-    $email = $_POST['email'];
-    $phone = $_POST['phone'];
-    $message = $_POST['message'];
-
+   
     // Send email using PHPMailer
     $mail = new PHPMailer(true);
 
@@ -107,6 +102,7 @@ if(isset($_POST['submit'])) {
         $phone = $_POST['phone'];
         $message = $_POST['message'];
 	$country = $_POST['country'];
+	$country = $_POST['attachment'];
 
         // Inserting the form data into the MySQL database
         $sql = "INSERT INTO clients (name, email, phone, message)
@@ -137,7 +133,7 @@ if(isset($_POST['submit'])) {
 
         // Recipients
         $mail->setFrom('revnyirongo@live.com', 'Client Registration');
-        $mail->addAddress('@live.com', 'Organizers');
+        $mail->addAddress('revnyirongo@live.com', 'Organizers');
 
         // Content
         $mail->isHTML(false);
