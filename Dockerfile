@@ -22,5 +22,5 @@ ENV COMPOSER_ALLOW_SUPERUSER=1
 
 RUN composer dump-autoload
 
-RUN composer install
+RUN apt install composer
 
