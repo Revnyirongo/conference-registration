@@ -6,6 +6,7 @@ RUN php -r "readfile('http://getcomposer.org/installer');" | php -- --install-di
     cd /var/www/html && \
     composer require phpmailer/phpmailer && \
     chown -R www-data:www-data /var/www/html/vendor
+RUN composer install
 RUN apk update
 RUN apk upgrade
 RUN apk add bash
@@ -23,4 +24,3 @@ ENV COMPOSER_ALLOW_SUPERUSER=1
 RUN composer dump-autoload
 
 RUN apt install composer
-
