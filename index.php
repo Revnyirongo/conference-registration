@@ -2,6 +2,60 @@
 <html>
 <head>
 	<title>UbuntuNet-Connect Conference registration</title>
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			background-color: #F4F4F4;
+		}
+		h1 {
+			text-align: center;
+			color: #0066CC;
+		}
+		form {
+			margin: 0 auto;
+			width: 80%;
+			max-width: 500px;
+			padding: 20px;
+			background-color: #FFFFFF;
+			border: 1px solid #CCCCCC;
+			border-radius: 5px;
+		}
+		label {
+			display: block;
+			font-weight: bold;
+			margin-bottom: 5px;
+			color: #333333;
+		}
+		input[type="text"],
+		input[type="email"],
+		input[type="tel"],
+		textarea {
+			padding: 10px;
+			border: 1px solid #CCCCCC;
+			border-radius: 5px;
+			width: 100%;
+			margin-bottom: 20px;
+			box-sizing: border-box;
+			font-size: 16px;
+			color: #333333;
+			resize: vertical;
+		}
+		input[type="file"] {
+			margin-bottom: 10px;
+		}
+		input[type="submit"] {
+			background-color: #0066CC;
+			color: #FFFFFF;
+			padding: 10px 20px;
+			border: none;
+			border-radius: 5px;
+			font-size: 16px;
+			cursor: pointer;
+		}
+		input[type="submit"]:hover {
+			background-color: #003399;
+		}
+	</style>
 </head>
 <body>
 	<h1>UbuntuNet-Connect conference registration</h1>
