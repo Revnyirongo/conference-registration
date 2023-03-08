@@ -9,7 +9,6 @@ RUN php -r "readfile('http://getcomposer.org/installer');" | php -- --install-di
 RUN apk update
 RUN apk upgrade
 RUN apk add bash
-RUN apk install composer
 RUN alias composer='php /usr/bin/composer'
 
 COPY . /var/www/html/
