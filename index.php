@@ -68,88 +68,64 @@
 		<input type="file" name="attachment" id="attachment"><br>
 		<input type="submit" name="submit" value="Register">
 	</form>
-	<?php
-
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
-
-// Include the PHPMailer library
-require 'vendor/autoload.php';
-
+<?php
 // Handle form submission
 if (isset($_POST['submit'])) {
+    // Retrieving the form data
+    $name = $_POST['name'];
+    $email = $_POST['email'];
+    $phone = $_POST['phone'];
+    $message = $_POST['message'];
+    $country = $_POST['country'];
 
-    // Send email using PHPMailer
-    $mail = new PHPMailer(true);
+    // Inserting the form data into the MySQL database
+    $servername = "database";
+    $username = "user";
+    $password = "password";
+    $dbname = "registrations";
 
-    try {
-        // Establishing a connection to the MySQL database
-        $servername = "database";
-        $username = "user";
-        $password = "password";
-        $dbname = "registrations";
+    $conn = mysqli_connect($servername, $username, $password, $dbname);
 
-        $conn = mysqli_connect($servername, $username, $password, $dbname);
-
-        // Checking if the connection is successful
-        if (!$conn) {
-            die("Connection failed: " . mysqli_connect_error());
-        }
-
-        // Retrieving the form data
-        $name = $_POST['name'];
-        $email = $_POST['email'];
-        $phone = $_POST['phone'];
-        $message = $_POST['message'];
-        $country = $_POST['country'];
-        $attachment = $_FILES['attachment'];
-
-        // Inserting the form data into the MySQL database
-        $sql = "INSERT INTO clients (name, email, phone, message)
-                VALUES ('$name', '$email', '$phone', '$message')";
-
-        if (mysqli_query($conn, $sql)) {
-            echo "Registration Successful!";
-        } else {
-            echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-        }
-
-        // Get a summary of all registrations
-        $result = mysqli_query($conn, "SELECT name, email, phone, message FROM clients");
-        $registrations = "";
-        while ($row = mysqli_fetch_array($result)) {
-            $registrations .= "Name: " . $row['name'] . "\nEmail: " . $row['email'] . "\nPhone: " . $row['phone'] . "\nMessage: " . $row['message'] . "\n\n";
-        }
-
-        // Server settings
-        $mail->SMTPDebug = 0;
-        $mail->isSMTP();
-        $mail->Host       = 'smtp.sparkpostmail.com';
-        $mail->SMTPAuth   = true;
-        $mail->Username   = 'SMTP_Injection';
-        $mail->Password   = 'b41b5387e9104d465f00d6b472ce3b84e5bcbdea';
-        $mail->SMTPSecure = 'tls';
-        $mail->Port       = 587;
-
-        // Recipients
-        $mail->setFrom('revnyirongo@live.com', 'Client Registration');
-        $mail->addAddress('devops@ubuntunet.net', 'Organizers');
-
-        // Attach file if uploaded
-        if ($attachment['name']) {
-            $mail->addAttachment($attachment['tmp_name'], $attachment['name']);
-        }
-
-        // Content
-        $mail->isHTML(false);
-        $mail->Subject = 'New Client Registration';
-        $mail->Body    = "A new client has registered. Details are as follows:\n\nName: $name\nEmail: $email\nPhone: $phone\nMessage: $message\n\nSummary of all registrations:\n\n$registrations";
-
-        $mail->send();
-        echo 'Registration successful!';
-    } catch (Exception $e) {
-        echo "Registration failed: {$mail->ErrorInfo}";
+    // Checking if the connection is successful
+    if (!$conn) {
+        die("Connection failed: " . mysqli_connect_error());
     }
+
+    $sql = "INSERT INTO clients (name, email, phone, message)
+            VALUES ('$name', '$email', '$phone', '$message')";
+
+    if (mysqli_query($conn, $sql)) {
+        echo "Registration Successful!";
+    } else {
+        echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+    }
+
+    // Get a summary of all registrations
+    $result = mysqli_query($conn, "SELECT name, email, phone, message FROM clients");
+    $registrations = "";
+    while ($row = mysqli_fetch_array($result)) {
+        $registrations .= "Name: " . $row['name'] . "\nEmail: " . $row['email'] . "\nPhone: " . $row['phone'] . "\nMessage: " . $row['message'] . "\n\n";
+    }
+
+    // Send email to the organizers
+    $to = "devops@ubuntunet.net";
+    $subject = "New Client Registration";
+    $headers = "From: revnyirongo@live.com\r\n";
+    $headers .= "Reply-To: $email\r\n";
+    $headers .= "Content-type: text/plain\r\n";
+
+    $message = "A new client has registered for the UbuntuNet-Connect conference.\n\n";
+    $message .= "Name: $name\nEmail: $email\nPhone: $phone\nCountry: $country\nMessage: $message\n\n";
+
+    $sent = mail($to, $subject, $message, $headers);
+
+    if ($sent) {
+        echo "Registration Successful! An email has been sent to the organizers.";
+    } else {
+        echo "Registration Successful! Failed to send email to the organizers.";
+    }
+
+    mysqli_close($conn);
 }
 ?>
 </body>
