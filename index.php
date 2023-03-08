@@ -85,10 +85,10 @@ if(isset($_POST['submit'])) {
 
     try {
         // Establishing a connection to the MySQL database
-        $servername = "localhost";
-        $username = "myuser";
-        $password = "mypassword";
-        $dbname = "mydatabase";
+        $servername = "database";
+        $username = "user";
+        $password = "password";
+        $dbname = "registrations";
 
         $conn = mysqli_connect($servername, $username, $password, $dbname);
 
