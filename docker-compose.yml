@@ -14,3 +14,16 @@ services:
     image: conference-registration
     volumes:
       - .:/var/www/html
+database:
+        image: mysql:5.7
+        ports:
+            - "33061:3306"
+        command: --init-file /data/application/starter.sql
+        volumes:
+            - ./starter.sql:/data/application/starter.sql
+        environment:
+            MYSQL_ROOT_USER: root
+            MYSQL_ROOT_PASSWORD: secret
+            MYSQL_DATABASE: registrations
+            MYSQL_USER: user
+            MYSQL_PASSWORD: password
