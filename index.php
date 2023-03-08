@@ -70,6 +70,10 @@
 	</form>
 	
 <?php
+	
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
 // Include the PHPMailer library
 require 'vendor/autoload.php';
 
