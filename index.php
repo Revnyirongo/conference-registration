@@ -63,6 +63,7 @@ if(isset($_POST['submit'])) {
         $email = $_POST['email'];
         $phone = $_POST['phone'];
         $message = $_POST['message'];
+	$country = $_POST['country'];
 
         // Inserting the form data into the MySQL database
         $sql = "INSERT INTO clients (name, email, phone, message)
