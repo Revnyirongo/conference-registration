@@ -8,6 +8,9 @@ RUN apk update
 RUN apk upgrade
 RUN apk add bash
 RUN alias composer='php /usr/bin/composer'
+RUN cd /var/www/html && \
+    composer require phpmailer/phpmailer && \
+    chown -R www-data:www-data /var/www/html/vendor
 
 COPY . /var/www/html/
 WORKDIR /var/www/html/
