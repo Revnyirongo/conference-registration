@@ -2,24 +2,27 @@ FROM php:7.3-fpm-alpine
 
 RUN docker-php-ext-install pdo pdo_mysql
 RUN docker-php-ext-install mysqli && docker-php-ext-enable mysqli
-RUN php -r "readfile('http://getcomposer.org/installer');" | php -- --install-dir=/usr/bin/ --filename=composer && \
-    cd /var/www/html && \
-    composer require phpmailer/phpmailer && \
-    chown -R www-data:www-data /var/www/html/vendor
-RUN apk update
-RUN apk upgrade
-RUN apk add bash
-RUN alias composer='php /usr/bin/composer'
+
+RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" && \
+    php composer-setup.php --install-dir=/usr/local/bin --filename=composer && \
+    rm composer-setup.php
+
+WORKDIR /var/www/html/
 
 COPY . /var/www/html/
-WORKDIR /var/www/html/
+
+RUN composer install --no-scripts --no-autoloader && \
+    composer dump-autoload --optimize && \
+    chown -R www-data:www-data /var/www/html
 
 EXPOSE 8081
 
-RUN composer update --no-scripts 
-
 ENV COMPOSER_ALLOW_SUPERUSER=1
 
-RUN composer dump-autoload
+RUN apk update && \
+    apk upgrade && \
+    apk add bash && \
+    apk add --virtual .build-deps && \
+    apk del .build-deps
 
-RUN composer install
+CMD ["php-fpm"]
