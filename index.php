@@ -117,7 +117,7 @@ if (isset($_POST['submit'])) {
     }
 
     // Send email to the organizers
-    $mail = new PHPMailer\PHPMailer\PHPMailer();
+    $mail = new phpmailer\phpmailer\PHPMailer();
 
     // Server settings
     $mail->SMTPDebug = 0;
