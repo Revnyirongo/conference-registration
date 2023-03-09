@@ -15,7 +15,7 @@ RUN composer install --no-scripts --no-autoloader && \
     composer dump-autoload --optimize && \
     chown -R www-data:www-data /var/www/html
 
-EXPOSE 8081
+EXPOSE 8082
 
 ENV COMPOSER_ALLOW_SUPERUSER=1
 
