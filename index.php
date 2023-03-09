@@ -2,49 +2,7 @@
 <html>
 <head>
 	<title>UbuntuNet Conference registration</title>
-	<style>
-		body {
-			text-align: center;
-		}
-		h1 {
-			margin-top: 50px;
-			margin-bottom: 20px;
-		}
-		form {
-			margin: 0 auto;
-			width: 50%;
-			text-align: left;
-		}
-		label {
-			display: inline-block;
-			width: 100px;
-			margin-bottom: 10px;
-			text-align: right;
-		}
-		input[type=text], input[type=email], input[type=tel], textarea {
-			width: 250px;
-			padding: 5px;
-			margin-bottom: 10px;
-			border: 1px solid #ccc;
-			border-radius: 4px;
-			box-sizing: border-box;
-		}
-		input[type=file] {
-			margin-top: 10px;
-		}
-		input[type=submit] {
-			background-color: #4CAF50;
-			color: white;
-			padding: 10px 20px;
-			border: none;
-			border-radius: 4px;
-			cursor: pointer;
-			margin-top: 10px;
-		}
-		input[type=submit]:hover {
-			background-color: #45a049;
-		}
-	</style>
+	<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
 	<h1>UbuntuNet-Connect conference registration</h1>
@@ -68,6 +26,7 @@
 		<input type="file" name="attachment" id="attachment"><br>
 		<input type="submit" name="submit" value="Register">
 	</form>
+	<script src="script.js"></script>
 <?php
 require_once __DIR__ . '/vendor/autoload.php';
 
@@ -96,8 +55,15 @@ if (isset($_POST['submit'])) {
         die("Connection failed: " . mysqli_connect_error());
     }
 
-    $sql = "INSERT INTO clients (name, email, phone, message)
-            VALUES ('$name', '$email', '$phone', '$message')";
+      // Prepare file attachment for insertion into database
+    $attachment = '';
+    if (!empty($_FILES['attachment']['name'])) {
+        $tmp_name = $_FILES['attachment']['tmp_name'];
+        $attachment = addslashes(file_get_contents($tmp_name));
+    }
+
+    $sql = "INSERT INTO clients (name, email, phone, country, message, attachment)
+            VALUES ('$name', '$email', '$phone', '$country', '$message', '$attachment')";
 
     if (mysqli_query($conn, $sql)) {
         echo "Registration Successful!";
@@ -106,10 +72,10 @@ if (isset($_POST['submit'])) {
     }
 
     // Get a summary of all registrations
-    $result = mysqli_query($conn, "SELECT name, email, phone, message FROM clients");
+    $result = mysqli_query($conn, "SELECT name, email, phone, country, message FROM clients");
     $registrations = "";
     while ($row = mysqli_fetch_array($result)) {
-        $registrations .= "Name: " . $row['name'] . "\nEmail: " . $row['email'] . "\nPhone: " . $row['phone'] . "\nMessage: " . $row['message'] . "\n\n";
+        $registrations .= "Name: " . $row['name'] . "\nEmail: " . $row['email'] . "\nPhone: " . $row['phone'] . "\nCountry: " . $row['country'] . "\nMessage: " . $row['message'] . "\n\n";
     }
 
     // Send email to the organizers
@@ -136,10 +102,11 @@ if (isset($_POST['submit'])) {
     $mail->Body   .= "Name: $name\nEmail: $email\nPhone: $phone\nCountry: $country\nMessage: $message\n\n";
 
     if($mail->send()) {
-        echo "Registration Successful! An email has been sent to the organizers.";
+        echo "An email has been sent to the organizers.";
     } else {
         echo "Registration Successful but Failed to send email to the organizers.";
     }
+
 
     mysqli_close($conn);
 } 
