@@ -68,15 +68,11 @@
 		<input type="file" name="attachment" id="attachment"><br>
 		<input type="submit" name="submit" value="Register">
 	</form>
-
 <?php
 require_once __DIR__ . '/vendor/autoload.php';
+
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
-
-require_once('vendor/phpmailer/phpmailer/src/PHPMailer.php');
-require_once('vendor/phpmailer/phpmailer/src//SMTP.php');
-require_once('vendor/phpmailer/phpmailer/src/Exception.php');
 
 // Handle form submission
 if (isset($_POST['submit'])) {
@@ -117,8 +113,7 @@ if (isset($_POST['submit'])) {
     }
 
     // Send email to the organizers
-    $mail = new PHPMailer\PHPMailer\PHPMailer();
-
+    $mail = new PHPMailer(true);
 
     // Server settings
     $mail->SMTPDebug = 0;
@@ -148,6 +143,6 @@ if (isset($_POST['submit'])) {
 
     mysqli_close($conn);
 } 
-	?>
+?>
 </body>
 </html>
