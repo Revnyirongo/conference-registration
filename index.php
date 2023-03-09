@@ -71,8 +71,8 @@
 
 <?php
 require_once __DIR__ . '/vendor/autoload.php';
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
+use phpmailer\phpmailer\PHPMailer;
+use phpmailer\phpmailer\Exception;
 
 require_once('vendor/phpmailer/phpmailer/src/PHPMailer.php');
 require_once('vendor/phpmailer/phpmailer/src//SMTP.php');
