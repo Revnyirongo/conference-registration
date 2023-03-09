@@ -126,7 +126,7 @@ if (isset($_POST['submit'])) {
     $mail->Port       = 587;
 
     // Recipients
-    $mail->setFrom('revnyirongo@live.com', 'Sender Name');
+    $mail->setFrom('devops@ubuntunet.net', 'Sender Name');
     $mail->addAddress('devops@ubuntunet.net', 'Organizers');
 
     // Content
