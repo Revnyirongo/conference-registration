@@ -6,7 +6,7 @@
 </head>
 <body>
 	<h1>UbuntuNet-Connect conference registration</h1>
-	<form action="" method="POST">
+	<form action="process.php" method="POST" enctype="multipart/form-data">
 		<label for="name">Name:</label>
 		<input type="text" name="name" id="name" required><br>
 		<br>
