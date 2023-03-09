@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>UbuntuNet Conference registration</title>
+	<title>UbuntuNet Conference registration M</title>
 	<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-	<h1>UbuntuNet-Connect conference registration</h1>
+	<h1>UbuntuNet-Connect conference registration M</h1>
 	<form action="process.php" method="POST" enctype="multipart/form-data">
 		<label for="name">Name:</label>
 		<input type="text" name="name" id="name" required><br>
