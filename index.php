@@ -70,6 +70,10 @@
 	</form>
 
 <?php
+require_once __DIR__ . '/vendor/autoload.php';
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
 require_once('path/to/PHPMailer/PHPMailer.php');
 require_once('path/to/PHPMailer/SMTP.php');
 require_once('path/to/PHPMailer/Exception.php');
