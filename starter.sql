@@ -7,6 +7,8 @@ create table clients(
    name VARCHAR(100) NOT NULL,
    email VARCHAR(40) NOT NULL,
    phone VARCHAR(100) NOT NULL,
+   country VARCHAR(100) NOT NULL,
    message VARCHAR(100) NOT NULL,
-   PRIMARY KEY ( id )
+   attachment LONGBLOB,
+   PRIMARY KEY (id)
 );
