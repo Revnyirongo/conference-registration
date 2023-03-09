@@ -68,7 +68,12 @@
 		<input type="file" name="attachment" id="attachment"><br>
 		<input type="submit" name="submit" value="Register">
 	</form>
+
 <?php
+require_once('path/to/PHPMailer/PHPMailer.php');
+require_once('path/to/PHPMailer/SMTP.php');
+require_once('path/to/PHPMailer/Exception.php');
+
 // Handle form submission
 if (isset($_POST['submit'])) {
     // Retrieving the form data
@@ -108,25 +113,36 @@ if (isset($_POST['submit'])) {
     }
 
     // Send email to the organizers
-    $to = "devops@ubuntunet.net";
-    $subject = "New Client Registration";
-    $headers = "From: revnyirongo@live.com\r\n";
-    $headers .= "Reply-To: $email\r\n";
-    $headers .= "Content-type: text/plain\r\n";
+    $mail = new PHPMailer\PHPMailer\PHPMailer();
 
-    $message = "A new client has registered for the UbuntuNet-Connect conference.\n\n";
-    $message .= "Name: $name\nEmail: $email\nPhone: $phone\nCountry: $country\nMessage: $message\n\n";
+    // Server settings
+    $mail->SMTPDebug = 0;
+    $mail->isSMTP();
+    $mail->Host       = 'smtp.sparkpostmail.com';
+    $mail->SMTPAuth   = true;
+    $mail->Username   = 'SMTP_Injection';
+    $mail->Password   = 'b41b5387e9104d465f00d6b472ce3b84e5bcbdea';
+    $mail->SMTPSecure = 'tls';
+    $mail->Port       = 587;
 
-    $sent = mail($to, $subject, $message, $headers);
+    // Recipients
+    $mail->setFrom('revnyirongo@live.com', 'Sender Name');
+    $mail->addAddress('devops@ubuntunet.net', 'Organizers');
 
-    if ($sent) {
+    // Content
+    $mail->isHTML(false);
+    $mail->Subject = 'New Client Registration';
+    $mail->Body    = "A new client has registered for the UbuntuNet-Connect conference.\n\n";
+    $mail->Body   .= "Name: $name\nEmail: $email\nPhone: $phone\nCountry: $country\nMessage: $message\n\n";
+
+    if($mail->send()) {
         echo "Registration Successful! An email has been sent to the organizers.";
     } else {
-        echo "Registration Successful! Failed to send email to the organizers.";
+        echo "Registration Successful but Failed to send email to the organizers.";
     }
 
     mysqli_close($conn);
-}
-?>
+} 
+	?>
 </body>
 </html>
